@@ -42,6 +42,28 @@ const observer = new IntersectionObserver((entries) => {
     entries.forEach(entry => {
         if (entry.isIntersecting) {
             entry.target.classList.add('visible');
+            
+            // Animate timeline items sequentially
+            if (entry.target.id === 'journey') {
+                const timelineItems = entry.target.querySelectorAll('.timeline-item');
+                timelineItems.forEach((item, index) => {
+                    setTimeout(() => {
+                        item.style.opacity = '1';
+                        item.style.transform = 'translateY(0)';
+                    }, index * 300);
+                });
+            }
+            
+            // Animate skill cards with stagger effect
+            if (entry.target.id === 'skills') {
+                const skillCards = entry.target.querySelectorAll('.skill-card');
+                skillCards.forEach((card, index) => {
+                    setTimeout(() => {
+                        card.style.opacity = '1';
+                        card.style.transform = 'translateY(0)';
+                    }, index * 200);
+                });
+            }
         }
     });
 }, observerOptions);
@@ -60,7 +82,7 @@ document.addEventListener('mousemove', (e) => {
 });
 
 // Enhanced hover effects for content boxes
-document.querySelectorAll('.content-box').forEach(box => {
+document.querySelectorAll('.content-box, .skill-card, .contact-card').forEach(box => {
     box.addEventListener('mouseenter', () => {
         cursor.style.transform = 'scale(1.5)';
         cursorFollower.style.transform = 'scale(1.5)';
@@ -73,7 +95,7 @@ document.querySelectorAll('.content-box').forEach(box => {
 });
 
 // Add subtle floating animation to content boxes
-document.querySelectorAll('.content-box').forEach((box, index) => {
+document.querySelectorAll('.content-box, .skill-card, .contact-card').forEach((box, index) => {
     box.style.animation = `float ${3 + index * 0.2}s ease-in-out infinite`;
 });
 
@@ -86,6 +108,38 @@ style.textContent = `
     }
 `;
 document.head.appendChild(style);
+
+// Initialize timeline items
+document.querySelectorAll('.timeline-item').forEach(item => {
+    item.style.opacity = '0';
+    item.style.transform = 'translateY(20px)';
+    item.style.transition = 'all 0.5s ease';
+});
+
+// Initialize skill cards
+document.querySelectorAll('.skill-card').forEach(card => {
+    card.style.opacity = '0';
+    card.style.transform = 'translateY(20px)';
+    card.style.transition = 'all 0.5s ease';
+});
+
+// Add click effect to interactive cards
+document.querySelectorAll('.interactive-card').forEach(card => {
+    card.addEventListener('click', function() {
+        this.classList.toggle('flipped');
+    });
+});
+
+// Add hover effect to social links
+document.querySelectorAll('.social-link').forEach(link => {
+    link.addEventListener('mouseenter', function() {
+        this.style.transform = 'translateY(-5px) rotate(5deg)';
+    });
+    
+    link.addEventListener('mouseleave', function() {
+        this.style.transform = 'translateY(0) rotate(0)';
+    });
+});
 
 // Click ripple effect
 document.addEventListener('click', (e) => {
