@@ -148,7 +148,7 @@ section.visible {
 .content-box {
     background-color: white;
     border-radius: 12px;
-    padding: 2.5rem;
+    padding: 5rem 10rem 10rem 10rem;
     margin: 1.5rem 0;
     box-shadow: 0 4px 20px rgba(0,0,0,0.05);
     transition: all 0.4s cubic-bezier(0.4, 0, 0.2, 1);
@@ -206,21 +206,30 @@ footer {
     margin-top: 2rem;
 }
 
-/* Glitch text effect */
-.glitch-text {
+/* move text effect */
+.floating-text {
     position: relative;
-    animation: glitch 1s linear infinite;
+    animation: float 8s ease-in-out infinite;
 }
 
-@keyframes glitch {
-    2%, 64% {
-        transform: translate(2px, 0) skew(0deg);
+@keyframes float {
+    0% {
+        transform: translate(0px, 0px);
     }
-    4%, 60% {
-        transform: translate(-2px, 0) skew(0deg);
+    20% {
+        transform: translate(8px, -12px);
     }
-    62% {
-        transform: translate(0, 0) skew(5deg);
+    40% {
+        transform: translate(-15px, 5px);
+    }
+    60% {
+        transform: translate(12px, 18px);
+    }
+    80% {
+        transform: translate(-6px, -8px);
+    }
+    100% {
+        transform: translate(0px, 0px);
     }
 }
 
@@ -228,7 +237,7 @@ footer {
 .scroll-indicator {
     position: absolute;
     bottom: 2rem;
-    left: 50%;
+    left: 45%;
     transform: translateX(-50%);
     display: flex;
     flex-direction: column;
@@ -267,6 +276,13 @@ footer {
     text-align: center;
     transition: transform 0.8s;
     transform-style: preserve-3d;
+}
+
+.card-text {
+    font-size: 1.2rem;
+
+
+
 }
 
 .interactive-card:hover .card-inner {
